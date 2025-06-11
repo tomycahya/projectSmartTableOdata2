@@ -93,6 +93,13 @@
           "target": [
             "Targetsmarttable"
           ]
+        },
+        {
+          "name": "RouteDetail",
+          "pattern": "id/{id}",
+          "target": [
+            "TargetDetails"
+          ]
         }
       ],
       "targets": {
@@ -102,6 +109,13 @@
           "clearControlAggregation": false,
           "viewId": "smarttable",
           "viewName": "smarttable"
+        },
+        "TargetDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Detail",
+          "viewName": "Detail"
         }
       }
     },

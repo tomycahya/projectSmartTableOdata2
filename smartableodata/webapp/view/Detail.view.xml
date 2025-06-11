@@ -1,0 +1,130 @@
+<mvc:View
+    controllerName="smartableodata.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    height="100%"
+>
+    <Page
+        id="page2"
+        title="{i18n>title}"
+        showHeader="false"
+        class="sapUiResponsiveContentPadding"
+        showNavButton="true"
+        navButtonPress="onNavBack"
+    >
+        <content>
+            <ObjectHeader
+                title="{productModel>/Name}"
+                id="object"
+                number="{
+                                        parts: [
+                                            {path: 'productModel>/Price'},
+                                            {path: 'USD'}
+                                        ],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false}
+                                    }"
+                numberUnit="USD"
+                backgroundDesign="Solid"
+            >
+                <attributes>
+                    <ObjectAttribute
+                        id="oattr"
+                        title="Product ID"
+                        text="{productModel>/ID}"
+                    />
+                    <ObjectAttribute
+                        id="oattr2"
+                        title="Product Description"
+                        text="{productModel>/Description}"
+                    />
+                </attributes>
+                <statuses>
+                    <ObjectStatus
+                        text="{productModel>/Rating}"
+                        id="ObjectStatus2"
+                    />
+                </statuses>
+            </ObjectHeader>
+
+            <IconTabBar id="icon1">
+                <items>
+                    <IconTabFilter
+                        id="iconfilter"
+                        text="Details"
+                    >
+                        <f:SimpleForm
+                            id="smpleform"
+                            backgroundDesign="Solid"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                        >
+                            <f:content>
+                                <Label
+                                    id="label1"
+                                    text="Product ID."
+                                />
+                                <Text
+                                    id="text1"
+                                    text="{productModel>/ID}"
+                                />
+                                <Label
+                                    id="label"
+                                    text="Product Name"
+                                />
+                                <Text
+                                    id="text"
+                                    text="{productModel>/Name}"
+                                />
+                                <Label
+                                    id="labelPrice"
+                                    text="Product Price"
+                                />
+                                <Text
+                                    id="textPrice"
+                                    text="{
+                                        parts: [
+                                            {path: 'productModel>/Price'},
+                                            {path: 'USD'}
+                                        ],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false}
+                                    }"
+                                />
+                            </f:content>
+                        </f:SimpleForm>
+                    </IconTabFilter>
+                    <!-- <IconTabFilter id="iconfilter2" text="Description"></IconTabFilter> -->
+                </items>
+            </IconTabBar>
+        </content>
+        <!-- <footer>
+            <Bar
+                id="barDetail"
+                design="Footer"
+            >
+                <contentRight>
+                    <Button
+                        id="editButton"
+                        type="Default"
+                        press="onUpdate()"
+                        text="Edit Product"
+                        icon="sap-icon://edit"
+                    />
+                    <Button
+                        id="deleteButton"
+                        text="Delete Product"
+                        type="Reject"
+                        press="onDelete"
+                        icon="sap-icon://delete"
+                    />
+                </contentRight>
+            </Bar>
+        </footer> -->
+    </Page>
+</mvc:View>
