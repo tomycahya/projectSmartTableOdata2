@@ -1,4 +1,7 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
+sap.ui.define([
+  "sap/ui/core/mvc/Controller",
+  "sap/m/MessageToast"
+], function (Controller,MessageToast) {
   "use strict";
 
   return Controller.extend("smartableodata.controller.smarttable", {
@@ -13,18 +16,37 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
         .getRouter()
         .navTo("RouteDetail", { id: id });
     },
-    onSearch: function (oEvent) {
-      var oSmartFilterBar = this.byId("smartFilterBar");
-      var oTable = this.byId("_IDGenTable");
+    	_getSmartTable: function () {
+			if (!this._oSmartTable) {
+				this._oSmartTable = this.getView().byId("LineItemsSmartTable");
+			}
+			return this._oSmartTable;
+		},
+    onSort: function () {
+			var oSmartTable = this._getSmartTable();
+			if (oSmartTable) {
+				oSmartTable.openPersonalisationDialog("Sort");
+			}
+		},
+    onFilter: function () {
+			var oSmartTable = this._getSmartTable();
+			if (oSmartTable) {
+				oSmartTable.openPersonalisationDialog("Filter");
+			}
+		},
 
-      // Ambil parameter filter dari SmartFilterBar
-      oSmartFilterBar.getFilters().then(function (aFilters) {
-        var oBinding = oTable.getBinding("items");
+		onGroup: function () {
+			MessageToast.show("Not available as this feature is disabled for this app in the view.xml");
+		},
 
-        if (oBinding) {
-          oBinding.filter(aFilters);
-        }
-      });
+    onFilterChange: function (oEvent) {
+      console.log(oEvent)
     },
+    onBeforeExport: function (oEvt) {
+			var mExcelSettings = oEvt.getParameter("exportSettings");
+
+			// Disable Worker as Mockserver is used in Demokit sample
+			mExcelSettings.worker = false;
+		},
   });
 });
