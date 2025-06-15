@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: smartableodata
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://devapphn1.corp.ai.astra.co.id:8001
+          client: '120'
+        app:
+          name: ZTRAIN_TMZ
+          description: TEST DEPLOY
+          package: $TMP
+          transport: ''
+        exclude:
+          - /test/

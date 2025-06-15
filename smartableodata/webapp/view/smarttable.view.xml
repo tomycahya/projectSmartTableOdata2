@@ -6,6 +6,9 @@
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
     height="100%"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:sf="sap.ui.comp.smartfield"
 >
     <Page
         id="page"
@@ -13,92 +16,179 @@
         showHeader="false"
     >
         <content>
-            <smartFilterBar:SmartFilterBar
-                id="smartFilterBar"
-                entitySet="Products"
-                persistencyKey="SmartFilter_Explored"
+            <f:DynamicPage
+                id="dynamicPage"
+                fitContent="true"
             >
-                <smartFilterBar:controlConfiguration>
-                    <smartFilterBar:ControlConfiguration
-                        id="_IDGenControlConfiguration"
-                        key="ID"
-                        visibleInAdvancedArea="true"
-                    >
-                        <!-- <smartFilterBar:defaultFilterValues>
+                <f:header>
+                    <f:DynamicPageHeader id="_IDGenDynamicPageHeader">
+                        <smartFilterBar:SmartFilterBar
+                            id="smartFilterBar"
+                            entitySet="Products"
+                            persistencyKey="SmartFilter_Explored"
+                        >
+                            <smartFilterBar:controlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    id="_IDGenControlConfiguration"
+                                    key="ID"
+                                    visibleInAdvancedArea="true"
+                                >
+                                <smartFilterBar:customControl>
+                                    <Input id="_IDGenInput" 
+                                    valueHelpRequest="onF4press" 
+                                    showValueHelp="true"
+                                    showSuggestion="true"
+                                    ></Input>
+                                </smartFilterBar:customControl>
+                                    <!-- <smartFilterBar:defaultFilterValues>
                             <smartFilterBar:SelectOption
                                 id="_IDGenSelectOption"
                                 low="{ID}"
                             />
                         </smartFilterBar:defaultFilterValues> -->
-                    </smartFilterBar:ControlConfiguration>
-                    <smartFilterBar:ControlConfiguration
-                        id="_IDGenControlConfiguration2"
-                        key="Name"
-                        visibleInAdvancedArea="true"
-                        
-                    />
-                </smartFilterBar:controlConfiguration>
-            </smartFilterBar:SmartFilterBar>
-            <smartTable:SmartTable
-                id="LineItemsSmartTable"
-                entitySet="Products"
-                smartFilterId="smartFilterBar"
-                tableType="ResponsiveTable"
-                enableExport="true"
-                beforeExport="onBeforeExport"
-                useVariantManagement="true"
-                useTablePersonalisation="true"
-                header="Products"
-                showRowCount="true"
-                persistencyKey="SmartTableAnalytical_Explored"
-                enableAutoBinding="true"
-                enableAutoColumnWidth="true"
-                class="sapUiResponsiveContentPadding"
-                editTogglable="false"
-                initiallyVisibleFields="ID,Name,Description,Price,DiscontinuedDate,Rating,ReleaseDate"
-            >
-                <smartTable:customToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar" design="Transparent">
-                        <ToolbarSpacer id="_IDGenToolbarSpacer" />
-                        <!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton"
+                                </smartFilterBar:ControlConfiguration>
+                                <smartFilterBar:ControlConfiguration
+                                    id="_IDGenControlConfiguration2"
+                                    key="Name"
+                                    visibleInAdvancedArea="true"
+                                />
+                            </smartFilterBar:controlConfiguration>
+                        </smartFilterBar:SmartFilterBar>
+                    </f:DynamicPageHeader>
+                </f:header>
+                <f:content>
+                    <smartTable:SmartTable
+                        id="LineItemsSmartTable"
+                        entitySet="Products"
+                        smartFilterId="smartFilterBar"
+                        tableType="ResponsiveTable"
+                        enableExport="true"
+                        beforeExport="onBeforeExport"
+                        useVariantManagement="true"
+                        useTablePersonalisation="true"
+                        header="Products"
+                        showRowCount="true"
+                        persistencyKey="SmartTableAnalytical_Explored"
+                        enableAutoBinding="true"
+                        enableAutoColumnWidth="true"
+                        class="sapUiResponsiveContentPadding"
+                        editTogglable="false"
+                        initiallyVisibleFields="ID,Name,Description,Price,DiscontinuedDate,Rating,ReleaseDate"
+                    >
+                        <smartTable:customToolbar>
+                            <OverflowToolbar
+                                id="_IDGenOverflowToolbar"
+                                design="Transparent"
+                            >
+                                <ToolbarSpacer id="_IDGenToolbarSpacer" />
+                                <!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton"
                             icon="sap-icon://activate"
                             tooltip="Apply UI state changes"
                             press="applyUiState"
                         /> -->
-                        <OverflowToolbarButton id="_IDGenOverflowToolbarButton1"
-                            icon="sap-icon://sort"
-                            tooltip="Sort"
-                            text="Sort"
-                            press="onSort"
-                        />
-                        <OverflowToolbarButton id="_IDGenOverflowToolbarButton2"
-                            icon="sap-icon://filter"
-                            tooltip="Filter"
-                            text="Filter"
-                            press="onFilter"
-                        />
-                        <OverflowToolbarButton id="_IDGenOverflowToolbarButton3"
-                            icon="sap-icon://group-2"
-                            tooltip="Group"
-                            text="Group"
-                            press="onGroup"
-                        />
-                        <!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton4"
+                                <OverflowToolbarButton
+                                    id="_IDGenOverflowToolbarButton1"
+                                    icon="sap-icon://sort"
+                                    tooltip="Sort"
+                                    text="Sort"
+                                    press="onSort"
+                                />
+                                <OverflowToolbarButton
+                                    id="_IDGenOverflowToolbarButton2"
+                                    icon="sap-icon://filter"
+                                    tooltip="Filter"
+                                    text="Filter"
+                                    press="onFilter"
+                                />
+                                <OverflowToolbarButton
+                                    id="_IDGenOverflowToolbarButton3"
+                                    icon="sap-icon://group-2"
+                                    tooltip="Group"
+                                    text="Group"
+                                    press="onGroup"
+                                />
+                                <!-- <OverflowToolbarButton id="_IDGenOverflowToolbarButton4"
                             icon="sap-icon://action-settings"
                             tooltip="Column Settings"
                             text="Column Settings"
                             press="onColumns"
                         /> -->
-                    </OverflowToolbar>
-                </smartTable:customToolbar>
-                <Table id="_IDGenTable">
-                    <ColumnListItem
+                            </OverflowToolbar>
+                        </smartTable:customToolbar>
+                        <Table
+                            id="_IDGenTable"
+                            growing="true"
+                        >
+                            <columns>
+                                <Column id="_IDGenColumn">
+                                    <customData>
+                                        <core:CustomData
+                                            xmlns:core="sap.ui.core"
+                                            key="p13nData"
+                                            value='\{"columnKey":"Price","leadingProperty":"Price","columnIndex":"3","demandPopin":true,"popinDisplay":"Inline","sortProperty":"Price","filterProperty":"Price","groupable":true,"sortable":true,"filterable":true,"visible":true,"hAlign":"End"}'
+                                        />
+                                    </customData>
+                                    <Text
+                                        id="_IDGenText"
+                                        text="Price"
+                                    />
+                                </Column>
+
+                                <Column id="_IDGenColumn2">
+                                    <customData>
+                                        <core:CustomData
+                                            xmlns:core="sap.ui.core"
+                                            key="p13nData"
+                                            value='\{"columnKey":"Rating","leadingProperty":"Rating","columnIndex":"5","demandPopin":true,"popinDisplay":"Inline","sortProperty":"Rating","filterProperty":"PriRatingce","groupable":true,"sortable":true,"filterable":true,"visible":true,"hAlign":"End"}'
+                                        />
+                                    </customData>
+                                    <Text
+                                        id="_IDGenText2"
+                                        text="Rating"
+                                    />
+                                </Column>
+                            </columns>
+
+                            <items>
+                                <!-- <ColumnListItem
                         id="_IDGenColumnListItem"
                         type="Navigation"
                         press="onItemPress"
-                    />
-                </Table>
-            </smartTable:SmartTable>
+                    /> -->
+                                <ColumnListItem
+                                    id="_IDGenColumnListItem1"
+                                    type="Navigation"
+                                    press="onItemPress"
+                                >
+                                    <cells>
+                                        <ObjectNumber
+                                            id="_IDGenObjectNumber"
+                                            number="{
+                                        parts: [
+                                            {path: 'Price'},
+                                            {path: 'USD'}
+                                        ],
+                                        type: 'sap.ui.model.type.Currency',
+                                        formatOptions: {showMeasure: false}
+                                    }"
+                                            state="{= ${Price} > 50 ? 'Error' : 'Success' }"
+                                            unit="USD"
+                                        />
+                                        <Text
+                                            id="_IDGenObjectStatus2"
+                                            text="{Rating}"
+                                        />
+                                        <!-- <mc:SmartBulletMicroChart
+                                            id="ItemsSmartBulletMicroChart"
+                                            entitySet="Products"
+                                        /> -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </smartTable:SmartTable>
+                </f:content>
+            </f:DynamicPage>
         </content>
     </Page>
 </mvc:View>

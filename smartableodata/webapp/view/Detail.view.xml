@@ -28,6 +28,8 @@
                                     }"
                 numberUnit="USD"
                 backgroundDesign="Solid"
+                responsive="true"
+                fullScreenOptimized="true"
             >
                 <attributes>
                     <ObjectAttribute
